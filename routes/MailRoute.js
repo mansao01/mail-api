@@ -5,10 +5,6 @@ const router = express.Router();
 
 
 router.post("/v1/sendMail", (req, res) => {
-    if (!req.body.destination || !isValidEmail(req.body.destination)) {
-        return res.status(400).json({msg: "Invalid or missing recipient email address"});
-    }
-
     const {email, subject, text} = req.query;
     let config = {
         host: "smtp.gmail.com",
@@ -42,8 +38,5 @@ router.post("/v1/sendMail", (req, res) => {
 
 })
 
-function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-}
 
 export default router;
